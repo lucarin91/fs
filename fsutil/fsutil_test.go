@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 	"reflect"
 	"strings"
 	"testing"
@@ -91,5 +92,23 @@ func equal(t *testing.T, got, expected interface{}) {
 func contains(t *testing.T, str, substr string) {
 	if !strings.Contains(str, substr) {
 		t.Fatalf("expected `%s` to contain `%s`", str, substr)
+	}
+}
+
+func TestWriteFile(t *testing.T) {
+	tmp := t.TempDir()
+	tmpFile := filepath.Join(tmp + "/test.txt")
+
+	base := fsutil.NewBase(fs.OS{})
+	err := base.WriteFile(tmpFile, []byte("hello"), 0644)
+	if err != nil {
+		t.Fatal(err)
+	}
+	ba, err := base.ReadFile(tmpFile)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if string(ba) != "hello" {
+		t.Fatalf("expected `hello`, got `%s`", ba)
 	}
 }

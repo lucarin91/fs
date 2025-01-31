@@ -8,6 +8,8 @@ import (
 	"path/filepath"
 	"sort"
 
+	"github.com/ncw/directio"
+
 	"github.com/codeclysm/fs"
 )
 
@@ -146,24 +148,27 @@ func (b Base) readDirNames(dirname string) ([]string, error) {
 	return names, nil
 }
 
-func readAll(r io.Reader, capacity int64) (b []byte, err error) {
+func readAll(r io.Reader, capacity int64) ([]byte, error) {
 	var buf bytes.Buffer
-	// If the buffer overflows, we will get bytes.ErrTooLarge.
-	// Return that as an error. Any other panic remains.
-	defer func() {
-		e := recover()
-		if e == nil {
-			return
+	buf.Grow(int(capacity))
+
+	// read in block to ensure memory alignment
+	block := directio.AlignedBlock(directio.BlockSize)
+	for {
+		n, err := io.ReadFull(r, block)
+		if err != nil {
+			if err == io.EOF {
+				break
+			}
+			if err == io.ErrUnexpectedEOF {
+				buf.Write(block[:n])
+				break
+			}
+
+			return nil, err
 		}
-		if panicErr, ok := e.(error); ok && panicErr == bytes.ErrTooLarge {
-			err = panicErr
-		} else {
-			panic(e)
-		}
-	}()
-	if int64(int(capacity)) == capacity {
-		buf.Grow(int(capacity))
+		buf.Write(block)
 	}
-	_, err = buf.ReadFrom(r)
-	return buf.Bytes(), err
+
+	return buf.Bytes(), nil
 }

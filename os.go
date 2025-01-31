@@ -3,6 +3,8 @@ package fs
 import (
 	"os"
 	"time"
+
+	"github.com/ncw/directio"
 )
 
 // OS is a wrapper around os package. Doesn't do anything fancy
@@ -53,11 +55,11 @@ func (o OS) NewFile(fd uintptr, name string) *os.File {
 }
 
 func (o OS) Open(name string) (*os.File, error) {
-	return os.Open(name)
+	return directio.OpenFile(name, os.O_RDONLY, 0)
 }
 
 func (o OS) OpenFile(name string, flag int, perm os.FileMode) (*os.File, error) {
-	return os.OpenFile(name, flag, perm)
+	return directio.OpenFile(name, flag, perm)
 }
 
 func (o OS) Readlink(name string) (string, error) {
