@@ -1,5 +1,3 @@
-github.com/codeclysm/fs v1.1.1 h1:ynaWw+zSdErx5pFVhp0+GwuQaVLwaRwUk6QOZnbpgWI=
-github.com/codeclysm/fs v1.1.1/go.mod h1:2fB10pbMgxbgfVgNWaTOdXQdjkeF/ZeX1eLHQ63hTA0=
 github.com/gofrs/flock v0.7.1 h1:DP+LD/t0njgoPBvT5MJLeliUIVQR03hiKR6vezdwHlc=
 github.com/gofrs/flock v0.7.1/go.mod h1:F1TvTiK9OcQqauNUHlbJvyl9Qa1QvF/gOUDKA14jxHU=
 github.com/kr/pretty v0.2.1 h1:Fmg33tUaq4/8ym9TJN1x7sLJnHVwhP33CNkpYV/7rwI=

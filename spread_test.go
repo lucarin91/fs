@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/codeclysm/fs"
+	"github.com/codeclysm/fs/v2"
 )
 
 func TestSpreadChroot(t *testing.T) {

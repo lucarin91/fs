@@ -10,7 +10,7 @@ import (
 
 	"github.com/ncw/directio"
 
-	"github.com/codeclysm/fs"
+	"github.com/codeclysm/fs/v2"
 )
 
 type Util interface {
