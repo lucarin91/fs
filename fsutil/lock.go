@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/codeclysm/fs"
+	"github.com/codeclysm/fs/v2"
 	"github.com/gofrs/flock"
 )
 

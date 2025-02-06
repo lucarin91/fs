@@ -6,8 +6,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/codeclysm/fs"
-	"github.com/codeclysm/fs/fsutil"
+	"github.com/codeclysm/fs/v2"
+	"github.com/codeclysm/fs/v2/fsutil"
 )
 
 func TestLock(t *testing.T) {

@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"sort"
 
-	"github.com/codeclysm/fs"
+	"github.com/codeclysm/fs/v2"
 )
 
 type Util interface {
